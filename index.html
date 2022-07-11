@@ -14,8 +14,40 @@
 
 <body>
     <header>
-        <h1> Weather Dashboard</h1>
+        <h1> Weather Dashboard <img src="https://img.icons8.com/doodle/48/000000/sun--v1.png"/></h1>
     </header>
+   
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-4 col-lg-3">
+                <div class="card">
+                    <h4 class="SearchCity">Search By City</h3>
+                    <form id="search-form" class="card-body">
+                    <input name="city-name" id="city-name" type="text" class="form-input my-2" />
+                    <button type="submit" class="btn btn-info">Search</button>
+                    </form>
+            </div>
+    <div id="previous-searches" class="card">
+            <h4 class="card-header">Previous Searches</h3>
+                <div class="card-body d-inline-flex flex-wrap">
+                    </div>
+                    </div>
+                    </div>
+    <div class="cold-12 col-md-8 col-lg-9">
+            <div class="card" id="current-forecast">
+                 <h3 class="card-header"></h3>
+                    <div class="card-body">
+                    <ul id="conditions">
+
+                    </ul>
+                    </div>
+                    </div>
+                    <h4 class="cincodia" id="fiveDay">5-Day Forecast <img src="https://img.icons8.com/doodle/48/000000/moon-and-sun.png"/></h4>
+                    <div class="d-inline-flex flex-wrap p-2" id="dailyForcast">
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
