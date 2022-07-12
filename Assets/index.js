@@ -1,23 +1,22 @@
-const cityNameInput = document.querySelector("#city-name");
+const cityinputt = document.querySelector("#city-name");
 const searchForm = document.querySelector("#Search");
-const currentConditionsUl = document.querySelector("#current-forecast #conditions");
-const currentConditionsH3 = document.querySelector("#current-forecast h3");
-const previousSearches = document.querySelector("#previous-searches");
-const previousSearchContainer = document.querySelector("#previous-searches .card-body");
-const dailyCardContainer = document.querySelector("#dailyForcast");
-const fiveDayHeader = document.querySelector("#fiveDay");
+const nowclimatelist = document.querySelector("#current-forecast #conditions");
+const currentH3 = document.querySelector("#current-forecast h3");
+const historys = document.querySelector("#previous-searches");
+const buscoDeAntes = document.querySelector("#previous-searches .card-body");
+const DiaCard = document.querySelector("#dailyForcast");
+const cincodias = document.querySelector("#fiveDay");
 
-const localCityArray = [];
+const cityArray = [];
 
-let previousSearch = JSON.parse(localStorage.getItem("searches"));
-
+let previousSearch = JSON.parse(localStorage.getItem("searches")); 
 if (previousSearch !== null) {
     for (let i = 0; i < previousSearch.length; i++) {
         if (previousSearch[i] === null) {
             previousSearch.splice(i, i+1);
         } else {
     
-            localCityArray.push(previousSearch[i]);
+            cityArray.push(previousSearch[i]); 
         }
     }
 }
@@ -36,17 +35,17 @@ const updateSearchHistory = () => {
                 
                 callOpenWeather(event.target.dataset.city);
             })
-            previousSearchContainer.appendChild(searchButton); 
+            buscoDeAntes.appendChild(searchButton); 
         }
     }
 const updateLocalStorage = (city) => {
     
-    if (localCityArray.includes(city)) {
+    if (cityArray.includes(city)) {
         return;
     } else {
-        localCityArray.push(city);
+        cityArray.push(city);
 
-        localStorage.setItem("searches", JSON.stringify(localCityArray));
+        localStorage.setItem("searches", JSON.stringify(cityArray));
         
         updateSearchHistory();
     }
@@ -54,21 +53,21 @@ const updateLocalStorage = (city) => {
 
 const callOpenWeather = (city) => {
    
-    const apiUrlCoords = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=0656324568a33303c80afd015f0c27f8";
+    const APICity = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=a806183978679594b1bdaa14de2497c0";
 
-    fetch(apiUrlCoords)
+    fetch(APICity)
     .then(function (response) {
     
         if (!response.ok) {
-            currentConditionsUl.innerHTML = "";
-            currentConditionsH3.textContent = "Never heard of this city 🤨";
+            nowclimatelist.innerHTML = "";
+            currentH3.textContent = "Never heard of this city 🤨";
             const errorText = document.createElement("li");
             errorText.classList.add("listEl");
             errorText.textContent = "";
-            currentConditionsUl.appendChild(errorText);
-            dailyCardContainer.innerHTML = "";
+            nowclimatelist.appendChild(errorText);
+            DiaCard.innerHTML = "";
             
-            fiveDayHeader.classList.add("hidden");
+            cincodias.classList.add("hidden");
         } else {
             
             response.json()
@@ -77,10 +76,10 @@ const callOpenWeather = (city) => {
             const cityName = data.name;
 
             
-            const oneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude=minutely,hourly,alerts&units=imperial&appid=0656324568a33303c80afd015f0c27f8`;
+            const APIUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude=minutely,hourly,alerts&units=imperial&appid=a806183978679594b1bdaa14de2497c0`;
             
             
-            fetch(oneCallUrl)
+            fetch(APIUrl) 
             .then(function (response) {
                 if (response.ok) {
                     
@@ -90,12 +89,12 @@ const callOpenWeather = (city) => {
                 const icon = ("<img src='https://openweathermap.org/img/w/" + data.current.weather[0].icon);
 
                 
-                currentConditionsH3.innerHTML = cityName + " (" + moment().format("MM/DD/YYYY") + ") " + icon;
+                currentH3.innerHTML = cityName + " (" + moment().format("MM/DD/YYYY") + ") " + icon;
 
                 const liArray = [];
                 
                 
-                currentConditionsUl.innerHTML = "";
+                nowclimatelist.innerHTML = "";
 
                 
                 for (let i = 0; i < 4; i++) {
@@ -126,12 +125,12 @@ const callOpenWeather = (city) => {
 
                 
                 liArray.forEach(li => {
-                    currentConditionsUl.append(li);
+                    nowclimatelist.append(li);
                 })
 
                 let dailyArray = [];
 
-                dailyCardContainer.innerHTML = "";
+                DiaCard.innerHTML = "";
 
                 
                 for (let i = 0; i < 5; i++) {
@@ -153,11 +152,11 @@ const callOpenWeather = (city) => {
                 }
 
                 
-                fiveDayHeader.classList.remove("hidden");
+                cincodias.classList.remove("hidden");
 
                 
                 dailyArray.forEach(card => {
-                    dailyCardContainer.appendChild(card);
+                    DiaCard.appendChild(card);
                 })
                 
                 updateLocalStorage(cityName);
@@ -174,20 +173,20 @@ searchForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
    
-    let searchValue = cityNameInput.value.trim("");
+    let searchValue = cityinputt.value.trim("");
 
     
     if (searchValue === "") {
-        currentConditionsH3.textContent = "Enter city name please!😗";
-        currentConditionsUl.innerHTML = "";
-        dailyCardContainer.innerHTML = "";
+        currentH3.textContent = "Enter city name please!😗";
+        nowclimatelist.innerHTML = "";
+        DiaCard.innerHTML = "";
         
-        fiveDayHeader.classList.add("hidden");
+        cincodias.classList.add("hidden");
     } else {
         
         callOpenWeather(searchValue);
        
-        cityNameInput.value = "";
+        cityinputt.value = "";
     }
 });
 
@@ -195,4 +194,3 @@ searchForm.addEventListener("submit", (event) => {
 updateSearchHistory();
 
 
-callOpenWeather("Washington D.C.");
