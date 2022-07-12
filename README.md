@@ -4,5 +4,6 @@ Weather-Dashboard web-page allows user to search for desired city and view curre
 
 Deployed application: https://celeste3140.github.io/Weather-Dashboard/
 
-https://user-images.githubusercontent.com/105468134/178595902-931bf6b2-1594-4ebc-92a1-a6b795654f06.png
+![screencapture-celeste3140-github-io-Weather-Dashboard-2022-07-12-14_07_19](https://user-images.githubusercontent.com/105468134/178596324-d53b861b-6ded-463c-97f9-7b44a3e5b6c4.png)
+
 
