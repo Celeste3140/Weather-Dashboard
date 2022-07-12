@@ -12,27 +12,33 @@ header h1 {
     text-align: center;
     padding: 20px;
 }
-.card {
+.card,
+header img {
     background-color: var(--Darkgreen); 
 }
-header img {
-    background-color: var(--Darkgreen);
-}
-.SearchCity {
-    color: var(--fontcolor);
-    background-color: var(--Darkgreen);
-}
-.card-header {
-    color: var(--fontcolor);
-}
-.cincodia {
-    color: var(--fontcolor);
-    background-color: var(--Darkgreen);
-}
+
+.SearchCity,
+.cincodia,
 .cincodia img {
     color: var(--fontcolor);
     background-color: var(--Darkgreen);
 }
+
 .container {
     color: var(--fontcolor);
+}
+.listEl {
+    list-style: none;
+    color: var(--Darkgreen);
+    font-weight: bold;
+}
+ul {
+    list-style-type: none;
+}
+h5 {
+color: var(--fontcolor);
+background-color: rgb(88, 129, 87);
+}
+#cincoCard {
+    background-color: rgb(88, 129, 87); 
 }
