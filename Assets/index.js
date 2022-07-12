@@ -10,6 +10,7 @@ const cincodias = document.querySelector("#fiveDay");
 const cityArray = [];
 
 let previousSearch = JSON.parse(localStorage.getItem("searches")); 
+
 if (previousSearch !== null) {
     for (let i = 0; i < previousSearch.length; i++) {
         if (previousSearch[i] === null) {
